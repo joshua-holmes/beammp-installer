@@ -11,7 +11,7 @@ fi
 searchFS () {
     # $1 is file/folder name to search for
     # $2 is criteria the path must follow to result in true, optional
-    # $2 may look like '[[ "$path" == *"cache"* ]]' if it is required for the path to contain the word "cache" somewhere in the directory
+    # $2 must be a function that sets `returnPath` variable
     local results="$(find $USER_HOME/ -name $1)"
     local results=$(echo $results | sed "s/\ \//\&\&\//g") # replace ' /' with '&&/'
     local results=$(echo $results | sed "s/\ /\#\#/g") # replace ' ' with '##'
@@ -29,26 +29,45 @@ searchFS () {
 }
 
 # Find BeamNG Proton prefix
-isSteam() {
-    path="$1"
-    if [[ "$path" != *"cache"* ]]; then
-        returnPath=$path
-    fi
-}
-searchFS 284160 isSteam
-steam="$returnPath"
+# isPrefix () {
+#     path="$1"
+#     if [[ "$path" != *"cache"* ]]; then
+#         returnPath="$path"
+#     fi
+# }
+# searchFS 284160 isPrefix
+# pfx="${returnPath}/pfx"
 
-# Find Steam executable
-# steam=$(which steams)
-# echo $steam
+# # Find Steam executable
+# steam=$(which steam)
 # if [ "$steam" == "" ]; then
 #     searchFS steam.sh
-#     for path in ${searchArr[@]}; do
-#         path=$(echo $path | sed "s/\#\#/\\\ /g") # replace '##' with '\ '
-#         steam=$path
-#     done
+#     steam="$returnPath"
+# fi
+# if [ "$steam" == "" ]; then
+#     searchFS Steam.exe
+#     steam="$returnPath"
 # fi
 
 # Find Proton executable
+isProtonExp () {
+    path="$1"
+    if [[ "$path" == *"Proton\ -\ Experimental/proton"* ]]; then
+        returnPath="$path"
+    fi
+}
+isProtonGE () {
+    path="$1"
+    if [[ "$path" == *"Proton\ -\ Experimental/proton"* ]]; then
+        returnPath="$path"
+    fi
+}
+searchFS proton isProtonExp
+proton="$returnPath"
+if [ "$proton" == "" ]; then
+    searchFS proton isProton
+    steam="$returnPath"
+fi
+echo "proton is: $proton"
 
 # Find BeamNG executable
