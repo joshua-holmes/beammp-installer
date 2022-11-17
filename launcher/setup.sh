@@ -1,12 +1,12 @@
 #!/bin/bash
 
-USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
-
 if [ $(whoami) != root ];
 then
     echo "This script must be run as root"
     exit 1
 fi
+
+USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
 searchFS () {
     # $1 is file/folder name to search for
@@ -32,46 +32,18 @@ searchFS () {
     done
 }
 
-# Find BeamNG Proton prefix
-# isPrefix () {
-#     path="$1"
-#     if [[ "$path" != *"cache"* ]]; then
-#         returnPath="$path"
-#     fi
-# }
-# searchFS 284160 "$USER_HOME/" isPrefix
-# pfx="${returnPath}/pfx"
-
 # Find Steam executable
-searchFS steam.sh "$USER_HOME/"
+searchFS steam.sh "$USER_HOME"
 steam="$returnPath"
 steamDir=$(echo "$steam" | sed "s/\/steam.sh$//g")
 
-# # Find Proton executable
-# isProtonExp () {
-#     path="$1"
-#     if [[ "$path" == *"Proton\ -\ Experimental/proton" ]]; then
-#         returnPath="$path"
-#     fi
-# }
-# searchFS proton "$USER_HOME/" isProtonExp
-# proton="$returnPath"
+if [[ "$steam" == "" ]]; then
+    echo "Error! 'steam.sh' could not be found." 
+    echo "Is Steam installed on this computer in the user's home directory?"
+    echo "'$USER_HOME'"
+    exit 1
+fi
 
-
-# Find BeamNG executable
-
-# echo "$steamDir/config/libraryfolders.vdf"
-# libraryfolders=$(cat "$steamDir/config/libraryfolders.vdf")
-# libraryfolders=$(echo $libraryfolders | sed "s/\ /\#\#/g") # replace ' ' with '##'
-# for line in $(grep -oE '"path"\s*"/.+"'); do
-#     echo before $line
-#     path=$(echo "$line" | grep -oE '/\S+[^"]')
-#     echo after $path
-#     if [[ "$line" =~ "/" ]]; then
-#         echo $path
-#     fi
-
-# done
 inQuote="0"
 isGoingToBePath="0"
 isPath="0"
@@ -116,8 +88,55 @@ read -r -a steamLibrariesArr <<< "$steamLibraries"
 for steamLib in "${steamLibrariesArr[@]}"; do
     steamLib=$(echo $steamLib | sed "s/\#\#/\\\ /g") # Replace '##' with '\ '
     echo $steamLib
-done
-# searchFS BeamNG.drive.exe "$USER_HOME/"
-# beamng="$returnPath"
 
-# echo "beamng is: $beamng"
+    # Find BeamNG Proton prefix
+    if [[ "$pfx" == "" ]]; then
+        
+        isPrefix () {
+            path="$1"
+            if [[ "$path" != *"cache"* ]]; then
+                returnPath="$path"
+            fi
+        }
+        searchFS 284160 "$steamLib/" isPrefix
+        pfx="$returnPath"
+    fi
+
+    # Find Proton executable
+    if [[ "$proton" == "" ]]; then
+        isProtonExp () {
+            path="$1"
+            if [[ "$path" == *"Proton\ -\ Experimental/proton" ]]; then
+                returnPath="$path"
+            fi
+        }
+        searchFS proton "$steamLib/" isProtonExp
+        proton="$returnPath"
+    fi
+
+    # Find BeamNG executable
+    if [[ "$beamng" == "" ]]; then
+        searchFS BeamNG.drive.exe "$steamLib/"
+        beamng="$returnPath"
+    fi
+done
+pfx="${pfx}/pfx"
+
+if [[ "$pfx" == "/pfx" ]] || [[ "$proton" == "" ]] || [[ "$beamng" == "" ]]; then
+    if [[ "$pfx" == "/pfx" ]]; then
+        echo "ERROR! Proton prefix for BeamNG could not be found."
+    fi
+    if [[ "$proton" == "" ]]; then
+        echo "ERROR! Proton Experimental could not be found. Is it installed on your system in a Steam library?"
+    fi
+    if [[ "$beamng" == "" ]]; then
+        echo "ERROR! BeamNG is not installed on this device using Steam."
+    fi
+    echo "Cannot continue with installation...exiting"
+    exit 1
+fi
+
+mkdir --parents "${USER_HOME}/.config"
+echo -e '' > "${USER_HOME}/.config/BeamMP.conf"
+
+export bob=hi
