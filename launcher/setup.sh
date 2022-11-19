@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-USER_HOME=$(getent passwd $SUDO_USER | cut -d : -f 6)
+export USER_HOME=$(getent passwd $SUDO_USER | cut -d : -f 6)
 
 searchFS () {
     # $1 is file/folder name to search for
@@ -138,3 +138,12 @@ fi
 
 mkdir --parents "${USER_HOME}/.config"
 echo -e "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "${USER_HOME}/.config/BeamMP.conf"
+
+export BMP_STEAM="$steam"
+export BMP_PROTON_PREFIX="$pfx"
+export BMP_PROTON="$proton"
+export BMP_BEAMNG="$beamng"
+
+curDir="$(dirname $0)"
+
+"${curDir}/beammp_installer.sh"
