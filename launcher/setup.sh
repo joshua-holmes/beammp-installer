@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
+USER_HOME=$(getent passwd $SUDO_USER | cut -d : -f 6)
 
 searchFS () {
     # $1 is file/folder name to search for
@@ -137,6 +137,4 @@ if [[ "$pfx" == "/pfx" ]] || [[ "$proton" == "" ]] || [[ "$beamng" == "" ]]; the
 fi
 
 mkdir --parents "${USER_HOME}/.config"
-echo -e '' > "${USER_HOME}/.config/BeamMP.conf"
-
-export bob=hi
+echo -e "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "${USER_HOME}/.config/BeamMP.conf"
