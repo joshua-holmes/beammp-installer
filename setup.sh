@@ -94,7 +94,7 @@ for steamLib in "${steamLibrariesArr[@]}"; do
         
         isPrefix () {
             path="$1"
-            if [[ "$path" != *"cache"* ]]; then
+            if [[ "$path" != *"cache"* ]] && [[ "$path" == *"compatdata"* ]]; then
                 returnPath="$path"
             fi
         }
@@ -136,8 +136,11 @@ if [[ "$pfx" == "/pfx" ]] || [[ "$proton" == "" ]] || [[ "$beamng" == "" ]]; the
     exit 1
 fi
 
+configFile="${USER_HOME}/.config/BeamMP.conf"
+echo "Found necessary paths. Saving to config file here:"
+echo "$configFile"
 mkdir --parents "${USER_HOME}/.config"
-echo -e "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "${USER_HOME}/.config/BeamMP.conf"
+printf "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "$configFile"
 
 export BMP_STEAM="$steam"
 export BMP_PROTON_PREFIX="$pfx"
@@ -146,4 +149,17 @@ export BMP_BEAMNG="$beamng"
 
 curDir="$(dirname $0)"
 
+echo "Running 'beammp_installer.sh'"
 "${curDir}/beammp_installer.sh"
+
+echo "Compiling 'beammp-launcher'"
+g++ -o /usr/bin/beammp-launcher "${curDir}/beammp_launcher.cpp"
+
+echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WAIT."
+export STEAM_COMPAT_DATA_PATH="$pfx"
+export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
+thing=$(echo $proton | sed 's/\\ /\ /g')
+echo "${thing} run ${beamng}"
+timeout 15 runuser --user "$SUDO_USER" "$thing" run "$beamng"
+
+echo "Done! Installation complete"

@@ -23,19 +23,21 @@ if [[ "$BMP_PROTON_PREFIX" == "" ]]; then
 fi
 
 # Download BeamMP installer
+echo "Downloading BeamMP"
 cache="${home}/.cache/beammp"
 zipFile="${cache}/BeamMP_Installer.zip"
 exeFile="${cache}/BeamMP_Installer.exe"
 mkdir --parents "$cache"
 wget --quiet --output-document="$zipFile" https://beammp.com/installer/BeamMP_Installer.zip
-unzip -o "$zipFile"
+unzip -od "$cache" "$zipFile"
 
 # Run BeamMP installer using Proton Experimental
 export WINE_PREFIX="$BMP_PROTON_PREFIX"
 echo "Running installer in Wine:"
-echo runuser --user "$user" wine "$exeFile"
-echo
+echo -e "runuser --user ${user} wine ${exeFile}\n"
 runuser --user "$user" wine "$exeFile"
 
 # Cleanup
 rm -fr "$cache"
+
+
