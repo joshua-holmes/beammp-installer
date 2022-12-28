@@ -31,11 +31,19 @@ mkdir --parents "$cache"
 wget --quiet --output-document="$zipFile" https://beammp.com/installer/BeamMP_Installer.zip
 unzip -od "$cache" "$zipFile"
 
-# Run BeamMP installer using Proton Experimental
+# Run BeamMP installer using Wine
 export WINE_PREFIX="$BMP_PROTON_PREFIX"
 echo "Running BeamMP installer in Wine:"
 echo -e "runuser --user ${user} wine ${exeFile}\n"
 runuser --user "$user" wine "$exeFile"
+echo
+beammpWineApp="${home}/.local/share/applications/wine/Programs/BeamMP-Launcher.desktop"
+if [[ -f "$beammpWineApp" ]]; then
+    echo "Removing unnecessary desktop application entry created by Wine"
+    rm "$beammpWineApp"
+else
+    echo "Could not find ${beammpWineApp}"
+fi
 
 # Add BeamMP exe location to config file
 mkdir --parents "${home}/.config"

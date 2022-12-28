@@ -141,7 +141,10 @@ configFile="${USER_HOME}/.config/BeamMP.conf"
 echo "Found necessary paths. Saving to config file here:"
 echo "$configFile"
 mkdir --parents "${USER_HOME}/.config"
-printf "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "$configFile"
+printf "BMP_STEAM=${steam}
+BMP_PROTON_PREFIX=${pfx}
+BMP_PROTON=${proton}
+BMP_BEAMNG=${beamng}\n" > "$configFile"
 echo
 
 export BMP_STEAM="$steam"
@@ -164,7 +167,26 @@ export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
 proton2=$(echo $proton | sed 's/\\ /\ /g')
 echo "${proton2} run ${beamng}"
 timeout 15 runuser --user "$SUDO_USER" "$proton2" run "$beamng"
+echo
+
+applications="${USER_HOME}/.local/share/applications"
+if [[ -d "$applications" ]]; then
+    echo "Creating desktop application entry"
+    printf "[Desktop Entry]
+Name=BeamMP
+Comment=A multiplayer mod for BeamNG
+Exec=${USER_HOME}/.local/bin/beammp-launcher
+Icon=steam_icon_284160
+Terminal=false
+Type=Application
+Categories=Game;\n" > "${applications}/BeamMP.desktop"
+
+else
+    echo "Cannot find ${USER_HOME}/.local/share/applications"
+    echo "Skipping creation of desktop application entry. Continuing..."
+fi
 
 echo
 echo "Done! Installation complete."
-echo "Run 'beammp-launcher' to launch BeamMP."
+echo "Search for BeamMP in your applications to run the game!"
+echo "If BeamMP does not show up, run 'beammp-launcher' in your terminal to launch BeamMP."
