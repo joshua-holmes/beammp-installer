@@ -146,6 +146,7 @@ export BMP_STEAM="$steam"
 export BMP_PROTON_PREFIX="$pfx"
 export BMP_PROTON="$proton"
 export BMP_BEAMNG="$beamng"
+export BMP_CONFIG="$configFile"
 
 curDir="$(dirname $0)"
 
@@ -153,13 +154,15 @@ echo "Running 'beammp_installer.sh'"
 "${curDir}/beammp_installer.sh"
 
 echo "Compiling 'beammp-launcher'"
-g++ -o /usr/bin/beammp-launcher "${curDir}/beammp_launcher.cpp"
+g++ -o "${USER_HOME}/.local/bin/beammp-launcher" "${curDir}/beammp_launcher.cpp"
 
 echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WAIT."
 export STEAM_COMPAT_DATA_PATH="$pfx"
 export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
-thing=$(echo $proton | sed 's/\\ /\ /g')
-echo "${thing} run ${beamng}"
-timeout 15 runuser --user "$SUDO_USER" "$thing" run "$beamng"
+proton2=$(echo $proton | sed 's/\\ /\ /g')
+echo "Running:"
+echo "${proton2} run ${beamng}"
+timeout 15 runuser --user "$SUDO_USER" "$proton2" run "$beamng"
 
-echo "Done! Installation complete"
+echo "Done! Installation complete."
+echo "Run 'beammp-launcher' to launch BeamMP."

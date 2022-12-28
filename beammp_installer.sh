@@ -37,7 +37,15 @@ echo "Running installer in Wine:"
 echo -e "runuser --user ${user} wine ${exeFile}\n"
 runuser --user "$user" wine "$exeFile"
 
+# Add BeamMP exe location to config file
+export BMP_BEAMMP="${BMP_PROTON_PREFIX}/drive_c/users/${user}/AppData/Roaming/BeamMP-Launcher/BeamMP-Launcher.exe"
+if [[ "$BMP_CONFIG" == "" ]]; then
+    config="${home}/.config/BeamMP.conf"
+else
+    config="$BMP_CONFIG"
+fi
+
+printf "BMP_BEAMMP=${BMP_BEAMMP}\n" >> "$config"
+
 # Cleanup
 rm -fr "$cache"
-
-
