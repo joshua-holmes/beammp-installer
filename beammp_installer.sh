@@ -33,11 +33,12 @@ unzip -od "$cache" "$zipFile"
 
 # Run BeamMP installer using Proton Experimental
 export WINE_PREFIX="$BMP_PROTON_PREFIX"
-echo "Running installer in Wine:"
+echo "Running BeamMP installer in Wine:"
 echo -e "runuser --user ${user} wine ${exeFile}\n"
 runuser --user "$user" wine "$exeFile"
 
 # Add BeamMP exe location to config file
+mkdir --parents "${home}/.config"
 export BMP_BEAMMP="${BMP_PROTON_PREFIX}/drive_c/users/${user}/AppData/Roaming/BeamMP-Launcher/BeamMP-Launcher.exe"
 if [[ "$BMP_CONFIG" == "" ]]; then
     config="${home}/.config/BeamMP.conf"

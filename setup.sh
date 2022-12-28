@@ -85,9 +85,10 @@ done <<< "$(grep -oE . $steamDir/config/libraryfolders.vdf)"
 
 read -r -a steamLibrariesArr <<< "$steamLibraries"
 
+echo "Searching Steam libraries for BeamNG, Proton prefix, and Proton Experimental executable..."
 for steamLib in "${steamLibrariesArr[@]}"; do
     steamLib=$(echo $steamLib | sed "s/\#\#/\\\ /g") # Replace '##' with '\ '
-    echo $steamLib
+    echo "Searching library: ${steamLib}"
 
     # Find BeamNG Proton prefix
     if [[ "$pfx" == "" ]]; then
@@ -141,6 +142,7 @@ echo "Found necessary paths. Saving to config file here:"
 echo "$configFile"
 mkdir --parents "${USER_HOME}/.config"
 printf "BMP_STEAM=${steam}\nBMP_PROTON_PREFIX=${pfx}\nBMP_PROTON=${proton}\nBMP_BEAMNG=${beamng}\n" > "$configFile"
+echo
 
 export BMP_STEAM="$steam"
 export BMP_PROTON_PREFIX="$pfx"
@@ -160,9 +162,9 @@ echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WA
 export STEAM_COMPAT_DATA_PATH="$pfx"
 export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
 proton2=$(echo $proton | sed 's/\\ /\ /g')
-echo "Running:"
 echo "${proton2} run ${beamng}"
 timeout 15 runuser --user "$SUDO_USER" "$proton2" run "$beamng"
 
+echo
 echo "Done! Installation complete."
 echo "Run 'beammp-launcher' to launch BeamMP."

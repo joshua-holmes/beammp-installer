@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
         std::string command = proton;
         command += " run ";
         command += beammp;
-        std::cout << "\nExecuting: " << command.c_str() << "\n";
+        std::cout << "Executing: " << command.c_str() << "\n\n";
         system(command.c_str());
     } catch(std::exception& error) {
         std::cout << error.what() << "\n\n";
