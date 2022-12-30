@@ -8,6 +8,9 @@ This installer comes with a full GUI that provides a user-friendly way to do one
 1. Correctly install BeamMP
 2. Install a custom BeamMP launcher that makes it easy to run BeamMP on Linux
 
+`curl -L https://raw.githubusercontent.com/rust-lang/rustlings/main/install.sh | bash`
+
+
 ## How to Get the Installer
 
 
