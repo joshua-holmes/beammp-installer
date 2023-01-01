@@ -26,7 +26,7 @@ This installer automates these things:
     
     c. Click "OK". If it's not installed already, Steam will tell you that it needs to restart. Go ahead and let it do so. That's it! After Proton is installed, you do not need to have "Proton Experimental" selected in the dropdown anymore, but you will still need both check boxes ticked.
 
-3. Now that BeamNG.drive and Proton are installed, run the following command in your terminal and then follow the next steps closely. It will ask you for your password:
+3. Now that BeamNG.drive and Proton are installed, run the following command in your terminal. It will ask you for your password:
 
     ```curl -L https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/install.sh | bash```
 
