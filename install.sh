@@ -6,6 +6,7 @@ echo "Downloading installation files..."
 for f in "${files[@]}"; do
     echo "$f"
     curl --location --output "$f" "https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/src/${f}"
+    sudo chmod +x "$f"
 done
 
 sudo ./setup.sh
