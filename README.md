@@ -6,7 +6,7 @@
 
 ## Welcome
 
-Do you like vrooming with friends? Does your Linux PC get jealous and make it difficult to run a multiplayer mod for BeamNG.drive? Do you lash out make the mod work anyway, but Linux sabatoges you by filling the map with annoying black boxes? Me too!
+Do you like vrooming with friends? Does your Linux PC get jealous and make it difficult to run a multiplayer mod for BeamNG.drive? Do you lash out make the mod work anyway, but Linux sabotages you by filling the map with annoying black boxes? Me too!
 
 Welcome to the Unoffical BeamMP Linux Installer! This program automates the installation of the BeamNG.drive multiplayer mod, BeamMP, on Linux using Proton, since the mod is natively available for Windows only.
 
