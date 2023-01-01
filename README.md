@@ -1,24 +1,51 @@
-# Unoffical BeamMP Installer
+# Unoffical Linux BeamMP Installer
 
-Welcome to the Unoffical BeamMP Installer! This program was created to make it easier for Linux users to install and run the BeamMP (BeamNG.drive multiplayer) mod on Linux devices! The mod is currently only available for Windows.
+*Note: This project is intended to automate the installation of the BeamMP client on a Linux PC. If you are looking to install the BeamMP server, I would encourage you to go the BeamMP's official website and follow the instructions there. Link is at the bottom of the page.*
 
-To make BeamMP work manually, BeamMP must be installed on the same Proton prefix that BeamNG is installed on, then BeamMP must be run using Steam's Experimental version of Proton. If it is not done correctly, BeamMP may run with distracting black boxes scattered around the map, or it may not run at all.
+![Unoffical Linux BeamMP Installer Logo](./images/beammp-linux.jpg)
 
-This installer comes with a full GUI that provides a user-friendly way to do one or both of the following things:
-1. Correctly install BeamMP
-2. Install a custom BeamMP launcher that makes it easy to run BeamMP on Linux
+## Welcome
 
-`curl -L https://raw.githubusercontent.com/rust-lang/rustlings/main/install.sh | bash`
+Welcome to the Unoffical BeamMP Linux Installer! This program automates the installation of the BeamNG.drive multiplayer mod, BeamMP, on Linux using Proton, since the mod is natively available for Windows only.
 
+To make BeamMP work manually, BeamMP must be installed on the same Proton prefix that BeamNG.drive is installed on, then BeamMP must be run using Steam's Experimental version of Proton. If it is not installed correctly, BeamMP may run with distracting black boxes scattered around the map, or it may not run at all.
 
-## How to Get the Installer
+This installer automates these things:
+1. Installation of BeamMP into the BeamNG.drive Proton prefix
+2. Installation of a custom BeamMP launcher that launches BeamMP using Proton Experimental
+3. Creation of a new BeamMP desktop application entry that uses the custom launcher to launch the game. That way you open your start menu and click on the game to launch it.
 
+## How to Install
+1. You must install BeamNG.drive using Steam, if you haven't already.
+2. If you haven't done so already, you also must install Proton Experimental. If you haven't, or you aren't sure if you have, you can do so through Steam and it is very easy. Follow these steps:
+    
+    a. Open Steam and click on the "Steam" button in the upper left, then click on "Settings".
+    
+    b. Click on "Steam Play" in the menu on the left. Make sure both check boxes are ticked and "Proton Experimental" is selected in the dropdown. (see photo)
+    ![Proton Experimental Example](./images/proton-exp-example.png)
+    
+    c. Click "OK". If it's not installed already, Steam will tell you that it needs to restart. Go ahead and let it do so. That's it! After Proton is installed, you do not need to have "Proton Experimental" selected in the dropdown anymore, but you will still need both check boxes ticked.
 
-## How to Use the Installer
+3. Now that BeamNG.drive and Proton are installed, run the following command in your terminal and then follow the next steps closely. It will ask you for your password:
 
+    ```curl -L https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/install.sh | bash```
+
+4. A window will pop up. Continue through the setup by clicking next until you click the "Finish" button.
+
+5. BeamNG launcher will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does it on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
+
+6. Once you see this message in your terminal, BeamMP is ready to run!
+![success message](./images/success-message.png)
 
 ## How to Run BeamMP After Installation
+To run BeamMP, open your start menu on your desktop and search for and click on a program titled "BeamMP". It will have the same icon as BeamNG.drive.
 
+If the desktop application entry failed to get created, you can launch the game by opening a terminal and running `beammp-launcher` from any directory.
+
+## Credit
+Here is a link to BeamMP's official website, and is the source of the mod:
+
+[https://beammp.com/](https://beammp.com/)
 
 ## Made by
 Joshua Holmes<br/>
