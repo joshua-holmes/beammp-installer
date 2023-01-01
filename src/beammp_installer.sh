@@ -10,7 +10,7 @@ else
 fi
 
 if [[ "$BMP_PROTON_PREFIX" == "" ]]; then
-    echo "BMP_PROTON_PREFIX environment variables must be set to continue installation."
+    echo "BMP_PROTON_PREFIX environment variable must be set to continue installation."
     echo "Currently this is what it is set to:"
     echo
     echo "BMP_PROTON_PREFIX=$BMP_PROTON_PREFIX"
@@ -31,19 +31,12 @@ mkdir --parents "$cache"
 wget --quiet --output-document="$zipFile" https://beammp.com/installer/BeamMP_Installer.zip
 unzip -od "$cache" "$zipFile"
 
-# Run BeamMP installer using Wine
-export WINE_PREFIX="$BMP_PROTON_PREFIX"
-echo "Running BeamMP installer in Wine:"
-echo -e "runuser --user ${user} wine ${exeFile}\n"
-runuser --user "$user" wine "$exeFile"
+# Run BeamMP installer using Proton
+proton=$(echo $BMP_PROTON | sed 's/\\ /\ /g')
+echo "Running BeamMP installer in Proton:"
+echo -e "runuser --user ${user} ${proton} run ${exeFile}\n"
+runuser --user "$user" "$proton" run "$exeFile"
 echo
-beammpWineApp="${home}/.local/share/applications/wine/Programs/BeamMP-Launcher.desktop"
-if [[ -f "$beammpWineApp" ]]; then
-    echo "Removing unnecessary desktop application entry created by Wine"
-    rm "$beammpWineApp"
-else
-    echo "Could not find ${beammpWineApp}"
-fi
 
 # Add BeamMP exe location to config file
 mkdir --parents "${home}/.config"

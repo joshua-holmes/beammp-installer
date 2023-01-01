@@ -152,6 +152,8 @@ export BMP_PROTON_PREFIX="$pfx"
 export BMP_PROTON="$proton"
 export BMP_BEAMNG="$beamng"
 export BMP_CONFIG="$configFile"
+export STEAM_COMPAT_DATA_PATH="$pfx"
+export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
 
 curDir="$(dirname $0)"
 
@@ -162,12 +164,6 @@ echo "Compiling 'beammp-launcher'"
 g++ -o "${USER_HOME}/.local/bin/beammp-launcher" "${curDir}/beammp_launcher.cpp"
 
 echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WAIT."
-export STEAM_COMPAT_DATA_PATH="$pfx"
-export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
-proton2=$(echo $proton | sed 's/\\ /\ /g')
-echo "${proton2} run ${beamng}"
-timeout 15 runuser --user "$SUDO_USER" "$proton2" run "$beamng"
-echo
 
 applications="${USER_HOME}/.local/share/applications"
 if [[ -d "$applications" ]]; then
