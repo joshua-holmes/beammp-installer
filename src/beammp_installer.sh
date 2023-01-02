@@ -1,26 +1,8 @@
 #!/bin/bash
 set -e
 
-if [ $(whoami) == root ]; then
-    home="$(getent passwd $SUDO_USER | cut -d : -f 6)"
-    user="$SUDO_USER"
-else
-    home="$HOME"
-    user="$USER"
-fi
-
-if [[ "$BMP_PROTON_PREFIX" == "" ]]; then
-    echo "BMP_PROTON_PREFIX environment variable must be set to continue installation."
-    echo "Currently this is what it is set to:"
-    echo
-    echo "BMP_PROTON_PREFIX=$BMP_PROTON_PREFIX"
-    echo
-    echo "It is recommended to run setup.sh file instead of running this script (beammp_installer.sh) directly."
-    echo "If you insist on running this script, please:"
-    echo -e "\tSet BMP_PROTON_PREFIX to path of BeamNG's proton prefix (ending in .../pfx)"
-    echo "Installation failed. Exiting..."
-    exit 1
-fi
+home="$(getent passwd $SUDO_USER | cut -d : -f 6)"
+user="$SUDO_USER"
 
 # Download BeamMP installer
 echo "Downloading BeamMP"
@@ -40,14 +22,16 @@ echo
 
 # Add BeamMP exe location to config file
 mkdir --parents "${home}/.config"
-export BMP_BEAMMP="${BMP_PROTON_PREFIX}/drive_c/users/${user}/AppData/Roaming/BeamMP-Launcher/BeamMP-Launcher.exe"
+searchFS "BeamMP-Launcher.exe" "$BMP_PROTON_PREFIX"
+beammp="$returnPath"
+export BMP_BEAMMP="$beammp"
 if [[ "$BMP_CONFIG" == "" ]]; then
     config="${home}/.config/BeamMP.conf"
 else
     config="$BMP_CONFIG"
 fi
 
-printf "BMP_BEAMMP=${BMP_BEAMMP}\n" >> "$config"
+printf "BMP_BEAMMP=${beammp}\n" >> "$config"
 
 # Cleanup
 rm -fr "$cache"

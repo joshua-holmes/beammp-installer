@@ -118,21 +118,17 @@ int main(int argc, char** argv) {
     std::cout << "Steam executable directory: " << std::getenv("STEAM_COMPAT_CLIENT_INSTALL_PATH") << "\n";
     std::cout << "Proton executable file: " << proton << "\n";
 
-    try {
-        std::filesystem::path beammpDir = beammp;
-        beammpDir = beammpDir.remove_filename();
+    std::filesystem::path beammpDir = beammp;
+    beammpDir = beammpDir.remove_filename();
 
-        std::filesystem::current_path(beammpDir);
-        std::string command = proton;
-        command += " run ";
-        command += beammp;
-        std::cout << "Executing: " << command.c_str() << "\n\n";
-        system(command.c_str());
-    } catch(std::exception& error) {
-        std::cout << error.what() << "\n\n";
-        std::cout << "Error likely occurred because of incorrect path. See `beammp-launcher --help` for help.\n";
-        return 1;
-    }
+    std::cout << "Entering this directory:\n";
+    std::cout << beammpDir << "\n";
+    std::filesystem::current_path(beammpDir);
+    std::string command = proton;
+    command += " run ";
+    command += beammp;
+    std::cout << "Executing: " << command.c_str() << "\n\n";
+    system(command.c_str());
     
     return 0;
 }

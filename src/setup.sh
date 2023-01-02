@@ -154,6 +154,7 @@ export BMP_BEAMNG="$beamng"
 export BMP_CONFIG="$configFile"
 export STEAM_COMPAT_DATA_PATH="$pfx"
 export STEAM_COMPAT_CLIENT_INSTALL_PATH="$steam"
+export -f searchFS
 
 curDir="$(dirname $0)"
 
@@ -161,7 +162,13 @@ echo "Running 'beammp_installer.sh'"
 "${curDir}/beammp_installer.sh"
 
 echo "Compiling 'beammp-launcher'"
-g++ -o "${USER_HOME}/.local/bin/beammp-launcher" "${curDir}/beammp_launcher.cpp"
+binFoler="${USER_HOME}/.local/bin"
+mkdir --parents "$binFoler"
+if [[ !($(echo "$PATH") =~ "$binFolder") ]]; then
+    export PATH="${binFolder}:${PATH}"
+    printf "export PATH=${binFolder}:${PATH}\n" >> "${USER_HOME}/.bashrc"
+fi
+g++ -o "${binFoler}/beammp-launcher" "${curDir}/beammp_launcher.cpp"
 
 echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WAIT."
 
