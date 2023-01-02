@@ -165,6 +165,11 @@ g++ -o "${USER_HOME}/.local/bin/beammp-launcher" "${curDir}/beammp_launcher.cpp"
 
 echo "Starting initialization of BeamNG (required for BeamMP to work). PLEASE WAIT."
 
+proton2=$(echo $proton | sed 's/\\ /\ /g')
+echo "${proton2} run ${beamng}"
+timeout 15 runuser --user "$SUDO_USER" "$proton2" run "$beamng"
+echo
+
 applications="${USER_HOME}/.local/share/applications"
 if [[ -d "$applications" ]]; then
     echo "Creating desktop application entry"

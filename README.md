@@ -30,7 +30,7 @@ This installer automates these things:
 
     ```curl -L https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/install.sh | bash```
 
-4. A window will pop up. Continue through the setup by clicking next until you click the "Finish" button.
+4. A window will pop up. Continue through the setup by clicking next until you see the "Finish" button. Uncheck the box so BeamNG.drive does not launch after installation and click "Finish" for the installer to finish the last few steps on it's own.
 
 5. BeamNG launcher will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does it on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
 
