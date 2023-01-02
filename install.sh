@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 files=("beammp_installer.sh" "beammp_launcher.cpp" "setup.sh")
 
