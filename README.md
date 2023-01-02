@@ -30,12 +30,13 @@ This installer automates these things:
 
     ```curl -L https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/install.sh | bash```
 
-4. A window will pop up. Continue through the setup by clicking next until you see the "Finish" button. Uncheck the box so BeamNG.drive does not launch after installation and click "Finish" for the installer to finish the last few steps on it's own.
+4. A window will pop up. Continue through the setup by clicking next until you see the "Finish" button. *Uncheck* the box so BeamNG.drive does not launch after installation and click "Finish". *If you leave this box checked before clicking "Finish", the BeamMP window that pops up will interrupt the installation of the custom launcher.*
 
-5. BeamNG launcher will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does it on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
+5. BeamNG will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does closes on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
 
 6. Once you see this message in your terminal, BeamMP is ready to run!
 ![success message](./images/success-message.png)
+If you do not see this message in your terminal, you can always go back to step 3 and try again! Running these steps multiple times will not hurt anything. If you think there is an error in the program I wrote, feel free to create an issue in GitHub!
 
 ## How to Run BeamMP After Installation
 To run BeamMP, open your start menu on your desktop and search for and click on a program titled "BeamMP". It will have the same icon as BeamNG.drive.
