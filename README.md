@@ -23,7 +23,7 @@ This installer automates these things:
 ## How to Install
 
 ### Video
-[![https://youtu.be/KwrYt8Z76Xg](./images/beammp-linux.jpg)](https://youtu.be/KwrYt8Z76Xg)
+[![https://youtu.be/KwrYt8Z76Xg](./images/icons8-play-button-circled-96.png)](https://youtu.be/KwrYt8Z76Xg)
 
 ### Written
 1. You must install BeamNG.drive using Steam, if you haven't already.
