@@ -16,6 +16,7 @@ This installer automates these things:
 3. Creation of a new BeamMP desktop application entry that uses the custom launcher to launch the game. That way you open your start menu and click on the game to launch it.
 
 ## Dependencies
+* Proton Experimental (installed through Steam)
 * wget
 * unzip
 * g++
