@@ -15,7 +15,17 @@ This installer automates these things:
 2. Installation of a custom BeamMP launcher that launches BeamMP using Proton Experimental
 3. Creation of a new BeamMP desktop application entry that uses the custom launcher to launch the game. That way you open your start menu and click on the game to launch it.
 
+## Dependencies
+* wget
+* unzip
+* g++
+
 ## How to Install
+
+### Video
+[![https://youtu.be/KwrYt8Z76Xg](./images/beammp-linux.jpg)](https://youtu.be/KwrYt8Z76Xg)
+
+### Written
 1. You must install BeamNG.drive using Steam, if you haven't already.
 2. If you haven't done so already, you also must install Proton Experimental. If you haven't, or you aren't sure if you have, you can do so through Steam and it is very easy. Follow these steps:
     
@@ -34,9 +44,7 @@ This installer automates these things:
 
 5. BeamNG will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does closes on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
 
-6. Once you see this message in your terminal, BeamMP is ready to run!
-![success message](./images/success-message.png)
-If you do not see this message in your terminal, you can always go back to step 3 and try again! Running these steps multiple times will not hurt anything. If you think there is an error in the program I wrote, feel free to create an issue in GitHub!
+6. Once the command is finished running, BeamMP is installed! See below for how to run it. If you need to reinstall, simply start again from step 3. Running the script multiple times will not harm or bloat your computer.
 
 ## How to Run BeamMP After Installation
 To run BeamMP, open your start menu on your desktop and search for and click on a program titled "BeamMP". It will have the same icon as BeamNG.drive.
