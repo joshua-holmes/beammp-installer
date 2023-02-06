@@ -16,7 +16,7 @@ This installer automates these things:
 3. Creation of a new BeamMP desktop application entry that uses the custom launcher to launch the game. That way you open your start menu and click on the game to launch it.
 
 ## Dependencies
-* Proton Experimental (installed through Steam)
+* Proton Experimental (installed through Steam, see below)
 * wget
 * unzip
 * g++
@@ -27,8 +27,8 @@ This installer automates these things:
 [![https://youtu.be/KwrYt8Z76Xg](./images/icons8-play-button-circled-96.png)](https://youtu.be/KwrYt8Z76Xg)
 
 ### Written
-1. You must install BeamNG.drive using Steam, if you haven't already.
-2. If you haven't done so already, you also must install Proton Experimental. If you haven't, or you aren't sure if you have, you can do so through Steam and it is very easy. Follow these steps:
+1. Install BeamNG.drive using Steam, if you haven't already.
+2. Check that Proton Experimental is installed. You can do so through Steam and it is very easy. Follow these steps:
     
     a. Open Steam and click on the "Steam" button in the upper left, then click on "Settings".
     
@@ -37,15 +37,22 @@ This installer automates these things:
     
     c. Click "OK". If it's not installed already, Steam will tell you that it needs to restart. Go ahead and let it do so. That's it! After Proton is installed, you do not need to have "Proton Experimental" selected in the dropdown anymore, but you will still need both check boxes ticked.
 
-3. Now that BeamNG.drive and Proton are installed, run the following command in your terminal. It will ask you for your password:
+3. STEAMDECK ONLY: Run `sudo steamos-readonly disable` in your terminal to unlock the SteamDeck's filesystem. The installation will fail without this step.
+
+4. Install the dependencies listed above in the "Dependencies" section near the top of the page. If you don't know how to do that, try one of these commands, depending on your Linux distro:
+* Debian/Ubuntu based: `sudo apt install wget unzip gcc`
+* Red Hat/Fedora based: `sudo dnf install wget unzip gcc`
+* Arch/Manjaro based (SteamDeck): `sudo pacman -S wget unzip gcc`
+
+5. Run the following command in your terminal. It will ask you for your password:
 
     ```curl -L https://raw.githubusercontent.com/joshua-holmes/beammp-installer/main/install.sh | bash```
 
-4. A window will pop up. Continue through the setup by clicking next until you see the "Finish" button. *Uncheck* the box so BeamNG.drive does not launch after installation and click "Finish". *If you leave this box checked before clicking "Finish", the BeamMP window that pops up will interrupt the installation of the custom launcher.*
+6. A window will pop up. Continue through the setup by clicking next until you see the "Finish" button. *Uncheck* the box so BeamNG.drive does not launch after installation and click "Finish". *If you leave this box checked before clicking "Finish", the BeamMP window that pops up will interrupt the installation of the custom launcher.*
 
-5. BeamNG will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does closes on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
+7. BeamNG will now launch on it's own for around 10 seconds. Hit the "x" to close the window, or just wait until it does closes on it's own after about 10 seconds. This automated launch just ensures the BeamNG config files needed for BeamMP are set.
 
-6. Once the command is finished running, BeamMP is installed! See below for how to run it. If you need to reinstall, simply start again from step 3. Running the script multiple times will not harm or bloat your computer.
+8. Once the command is finished running, BeamMP is installed! See below for how to run it. If you need to reinstall, simply start again from step 5. Running the script multiple times will not harm or bloat your computer.
 
 ## How to Run BeamMP After Installation
 To run BeamMP, open your start menu on your desktop and search for and click on a program titled "BeamMP". It will have the same icon as BeamNG.drive.
