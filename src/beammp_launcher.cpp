@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <fstream>
 #include <pwd.h>
@@ -41,7 +40,7 @@ void loadConfig(std::string directory) {
 
 int main(int argc, char** argv) {
     if (!(std::getenv("HOME") && std::getenv("USER"))) {
-        std::cout << "Hold up cowboy! Please set your HOME and USER environment variables.\n";
+        printf("Hold up cowboy! Please set your HOME and USER environment variables.\n");
         return 1;
     }
     std::string home = std::getenv("HOME");
@@ -69,23 +68,23 @@ int main(int argc, char** argv) {
         auto help = [arg]() {
             int exitCode;
             if (arg == "--help") {
-                std::cout << "Welcome to the BeamMP Laucher!\n";
-                std::cout << "This program launches BeamMP using an already installed Proton, which is installed using Steam.\n";
-                std::cout << "With a recent update to BeamNG, running the game without using Proton Experimental can result in black boxes appearing in the level, which is a texture caching issue.\n";
-                std::cout << "By running BeamMP with Proton, the caching issue no longer occurs. This script makes running BeamMP with Proton easier.\n\n";
+                printf("Welcome to the BeamMP Laucher!\n");
+                printf("This program launches BeamMP using an already installed Proton, which is installed using Steam.\n");
+                printf("With a recent update to BeamNG, running the game without using Proton Experimental can result in black boxes appearing in the level, which is a texture caching issue.\n");
+                printf("By running BeamMP with Proton, the caching issue no longer occurs. This script makes running BeamMP with Proton easier.\n\n");
 
-                std::cout << "Argument options are:\n";
+                printf("Argument options are:\n");
                 exitCode = 0;
             } else {
-                std::cout << "Incorrect arguments! Options are:\n";
+                printf("Incorrect arguments! Options are:\n");
                 exitCode = 1;
             }
             
-            std::cout << "--steam <path-to-steam-executable>\n";
-            std::cout << "--pfx <directory-of-beamng's-proton-prefix>\n";
-            std::cout << "--proton <path-of-proton-executable>\n";
-            std::cout << "--beammp <path-of-windows-beammp-executable>\n";
-            std::cout << "--help   this help menu" << "\n";
+            printf("--steam <path-to-steam-executable>\n");
+            printf("--pfx <directory-of-beamng's-proton-prefix>\n");
+            printf("--proton <path-of-proton-executable>\n");
+            printf("--beammp <path-of-windows-beammp-executable>\n");
+            printf("--help   this help menu\n");
             return exitCode;
         };
         if (i + 1 < argc) {
@@ -101,34 +100,32 @@ int main(int argc, char** argv) {
     }
 
     if (steam == "" || pfx == "" || proton == "" || beammp == "") {
-        if (steam == "") std::cout << "Cannot find Steam executable file." << "\n";
-        if (pfx == "") std::cout << "Cannot find BeamNG Proton prefix directory." << "\n";
-        if (proton == "") std::cout << "Cannot find Proton Experimental executable file." << "\n";
-        if (beammp == "") std::cout << "Cannot find BeamMP executable file." << "\n";
-        std::cout << "\nSee `$ beammp-launcher --help` for help.\n";
+        if (steam == "") printf("Cannot find Steam executable file.\n");
+        if (pfx == "") printf("Cannot find BeamNG Proton prefix directory.\n");
+        if (proton == "") printf("Cannot find Proton Experimental executable file.\n");
+        if (beammp == "") printf("Cannot find BeamMP executable file.\n");
+        printf("\nSee `$ beammp-launcher --help` for help.\n");
         return 1;
     }
-    
 
     setenv("STEAM_COMPAT_DATA_PATH", pfx.c_str(), 1);
     setenv("STEAM_COMPAT_CLIENT_INSTALL_PATH", steam.c_str(), 1);
-    
 
-    std::cout << "Proton prefix directory: " << std::getenv("STEAM_COMPAT_DATA_PATH") << "\n";
-    std::cout << "Steam executable directory: " << std::getenv("STEAM_COMPAT_CLIENT_INSTALL_PATH") << "\n";
-    std::cout << "Proton executable file: " << proton << "\n";
+    printf("Proton prefix directory: %s \n", std::getenv("STEAM_COMPAT_DATA_PATH"));
+    printf("Steam executable directory: %s \n", std::getenv("STEAM_COMPAT_CLIENT_INSTALL_PATH"));
+    printf("Proton executable file: %s \n", proton.c_str());
 
     std::filesystem::path beammpDir = beammp;
     beammpDir = beammpDir.remove_filename();
 
-    std::cout << "Entering this directory:\n";
-    std::cout << beammpDir << "\n";
+    printf("Entering this directory:\n");
+    printf("%s \n", beammpDir.c_str());
     std::filesystem::current_path(beammpDir);
     std::string command = proton;
     command += " run ";
     command += beammp;
-    std::cout << "Executing: " << command.c_str() << "\n\n";
+    printf("Executing: %s \n\n", command.c_str());
     system(command.c_str());
-    
+
     return 0;
 }
