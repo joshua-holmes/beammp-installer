@@ -1,5 +1,7 @@
 # Unoffical Linux BeamMP Installer
 
+***Attention: This repo is no longer being maintained. Feel free to use it, but it will not be updated and issues you experience will not be fixed.***
+
 *Note: This project is intended to automate the installation of the BeamMP client on a Linux PC. If you are looking to install the BeamMP server, I would encourage you to go the BeamMP's official website and follow the instructions there. Link is at the bottom of the page.*
 
 ![Unoffical Linux BeamMP Installer Logo](./images/beammp-linux.jpg)
